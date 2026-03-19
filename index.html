@@ -1,502 +1,405 @@
 <!DOCTYPE html>
-<html lang="ru" class="dark">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚔️ Батл Программистов: Old School vs AI-First | Steampunk Edition</title>
+    <title>Old School vs AI-First | Developer Battle</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:wght@400;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --copper: #B87333;
-            --bronze: #CD7F32;
-            --brass: #B5A642;
-            --leather: #654321;
-            --iron: #2F4F4F;
-            --steam: #F5F5DC;
-            --darkBrown: #3C1810;
-            --goldAccent: #DAA520;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
         
         body {
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(205, 127, 50, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(184, 115, 51, 0.1) 0%, transparent 50%),
-                linear-gradient(135deg, #1A0E0A 0%, #2D1810 50%, #3C1810 100%);
-            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow-x: hidden;
         }
         
-        .steampunk-border {
-            border: 3px solid;
-            border-image: linear-gradient(45deg, var(--copper), var(--bronze), var(--brass)) 1;
-            position: relative;
+        .apple-gradient-blue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         
-        .steampunk-border::before {
-            content: '';
-            position: absolute;
-            top: -6px; left: -6px; right: -6px; bottom: -6px;
-            background: linear-gradient(45deg, var(--copper), var(--bronze));
-            border-radius: 12px;
-            z-index: -1;
-            opacity: 0.3;
+        .apple-gradient-purple {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
         
-        .gear-rotate {
-            animation: rotate 20s linear infinite;
+        .apple-gradient-orange {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
         
-        .gear-reverse {
-            animation: rotate 25s linear infinite reverse;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes steam {
-            0%, 100% { opacity: 0.3; transform: translateY(0px) scale(1); }
-            50% { opacity: 0.8; transform: translateY(-20px) scale(1.1); }
-        }
-        
-        @keyframes glow-copper {
-            0%, 100% { box-shadow: 0 0 20px rgba(184, 115, 51, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(184, 115, 51, 0.8), 0 0 60px rgba(205, 127, 50, 0.4); }
-        }
-        
-        @keyframes glow-brass {
-            0%, 100% { box-shadow: 0 0 20px rgba(181, 166, 66, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(181, 166, 66, 0.8), 0 0 60px rgba(218, 165, 32, 0.4); }
-        }
-        
-        .steam-effect {
-            animation: steam 4s ease-in-out infinite;
-        }
-        
-        .glow-copper {
-            animation: glow-copper 3s ease-in-out infinite;
-        }
-        
-        .glow-brass {
-            animation: glow-brass 3s ease-in-out infinite;
-        }
-        
-        .copper-gradient { 
-            background: linear-gradient(135deg, var(--copper) 0%, var(--bronze) 100%);
-        }
-        
-        .brass-gradient {
-            background: linear-gradient(135deg, var(--brass) 0%, var(--goldAccent) 100%);
-        }
-        
-        .steampunk-text-copper {
-            background: linear-gradient(135deg, var(--copper) 0%, var(--bronze) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .steampunk-text-brass {
-            background: linear-gradient(135deg, var(--brass) 0%, var(--goldAccent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .steampunk-card {
-            background: 
-                linear-gradient(135deg, rgba(205, 127, 50, 0.1) 0%, rgba(184, 115, 51, 0.05) 100%),
-                rgba(45, 79, 79, 0.1);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(184, 115, 51, 0.3);
+        .apple-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(245, 245, 220, 0.1);
+                0 8px 32px rgba(31, 38, 135, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
         }
         
-        .vs-divider {
+        .apple-button {
+            background: #007AFF;
+            border: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            letter-spacing: -0.01em;
+        }
+        
+        .apple-button:hover {
+            background: #0051D5;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.3);
+        }
+        
+        .apple-button-secondary {
+            background: rgba(0, 122, 255, 0.1);
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            color: #007AFF;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .apple-button-secondary:hover {
+            background: rgba(0, 122, 255, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-orange {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .animate-float-gentle {
+            animation: float-gentle 8s ease-in-out infinite;
+        }
+        
+        .animate-pulse-soft {
+            animation: pulse-soft 4s ease-in-out infinite;
+        }
+        
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .hero-icon:hover {
+            transform: scale(1.05) translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .vs-container {
             position: relative;
-            background: linear-gradient(90deg, var(--copper), var(--goldAccent), var(--brass));
-            height: 6px;
-            border-radius: 3px;
-            box-shadow: 0 0 20px rgba(184, 115, 51, 0.5);
+            display: flex;
+            align-items: center;
+            margin: 3rem 0;
         }
         
-        .vs-divider::before {
-            content: '⚔️ VS ⚔️';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, var(--darkBrown), var(--leather));
-            color: var(--steam);
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-family: 'Cinzel', serif;
+        .vs-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #007AFF, transparent);
+        }
+        
+        .vs-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 700;
-            font-size: 1.3rem;
-            border: 3px solid var(--copper);
-            box-shadow: 0 0 20px rgba(184, 115, 51, 0.7);
+            color: #007AFF;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
+            margin: 0 1rem;
+            border: 3px solid #007AFF;
         }
-
-        .mechanical-pattern {
-            background-image: 
-                radial-gradient(circle at 25px 25px, rgba(184, 115, 51, 0.1) 2px, transparent 2px),
-                radial-gradient(circle at 75px 75px, rgba(205, 127, 50, 0.1) 1px, transparent 1px);
-            background-size: 100px 100px, 50px 50px;
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
-
-        .heading-font { font-family: 'Cinzel', serif; }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 40px;
+            border: 2px solid #007AFF;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 6px;
+        }
+        
+        .scroll-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #007AFF;
+            animation: scroll 2s infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(16px); opacity: 0; }
+        }
+        
+        .section-padding {
+            padding: 6rem 1.5rem;
+        }
+        
+        .container-max {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
     </style>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: { 
-                        serif: ['Crimson Text', 'serif'],
-                        cinzel: ['Cinzel', 'serif'],
-                        mono: ['JetBrains Mono', 'monospace']
+                    colors: {
+                        'apple-blue': '#007AFF',
+                        'apple-gray': '#F2F2F7',
+                        'apple-dark': '#1D1D1F'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out'
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="min-h-screen text-yellow-100 font-serif antialiased overflow-x-hidden mechanical-pattern">
 
-    <!-- Floating Gears Background -->
-    <div class="fixed inset-0 pointer-events-none z-0">
-        <svg class="absolute top-10 left-10 gear-rotate opacity-20" width="120" height="120" viewBox="0 0 120 120">
-            <circle cx="60" cy="60" r="50" fill="none" stroke="#B87333" stroke-width="2"/>
-            <g fill="#CD7F32">
-                <rect x="55" y="5" width="10" height="15" />
-                <rect x="55" y="100" width="10" height="15" />
-                <rect x="5" y="55" width="15" height="10" />
-                <rect x="100" y="55" width="15" height="10" />
-                <rect x="78" y="20" width="12" height="8" transform="rotate(45 84 24)" />
-                <rect x="30" y="92" width="12" height="8" transform="rotate(45 36 96)" />
-                <rect x="20" y="78" width="8" height="12" transform="rotate(-45 24 84)" />
-                <rect x="92" y="30" width="8" height="12" transform="rotate(-45 96 36)" />
-            </g>
-        </svg>
-        
-        <svg class="absolute top-20 right-20 gear-reverse opacity-15" width="80" height="80" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="30" fill="none" stroke="#B5A642" stroke-width="2"/>
-            <g fill="#DAA520">
-                <rect x="37" y="5" width="6" height="10" />
-                <rect x="37" y="65" width="6" height="10" />
-                <rect x="5" y="37" width="10" height="6" />
-                <rect x="65" y="37" width="10" height="6" />
-                <rect x="57" y="15" width="8" height="6" transform="rotate(45 61 18)" />
-                <rect x="15" y="59" width="8" height="6" transform="rotate(45 19 62)" />
-            </g>
-        </svg>
-        
-        <svg class="absolute bottom-20 left-32 gear-rotate opacity-10" width="100" height="100" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#654321" stroke-width="3"/>
-            <g fill="#8B4513">
-                <rect x="47" y="5" width="6" height="12" />
-                <rect x="47" y="83" width="6" height="12" />
-                <rect x="5" y="47" width="12" height="6" />
-                <rect x="83" y="47" width="12" height="6" />
-            </g>
-        </svg>
-
-        <svg class="absolute bottom-32 right-10 gear-reverse opacity-25" width="60" height="60" viewBox="0 0 60 60">
-            <circle cx="30" cy="30" r="20" fill="none" stroke="#2F4F4F" stroke-width="2"/>
-            <g fill="#696969">
-                <rect x="28" y="5" width="4" height="8" />
-                <rect x="28" y="47" width="4" height="8" />
-                <rect x="5" y="28" width="8" height="4" />
-                <rect x="47" y="28" width="8" height="4" />
-            </g>
-        </svg>
-    </div>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 apple-card border-b border-white/20">
+        <div class="container-max">
+            <div class="flex justify-between items-center py-4 px-6">
+                <div class="text-xl font-semibold text-gray-900">Developer Battle</div>
+                <button class="apple-button px-6 py-2 rounded-full text-sm">
+                    Join AI-First
+                </button>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden z-10">
-        <!-- Steam Effects -->
-        <div class="absolute inset-0">
-            <div class="absolute top-1/4 left-1/6 w-32 h-32 bg-yellow-100 rounded-full opacity-10 blur-xl steam-effect"></div>
-            <div class="absolute bottom-1/3 right-1/4 w-24 h-24 bg-yellow-200 rounded-full opacity-15 blur-lg steam-effect" style="animation-delay: -2s;"></div>
-            <div class="absolute top-1/2 left-1/2 w-20 h-20 bg-orange-200 rounded-full opacity-20 blur-md steam-effect" style="animation-delay: -1s;"></div>
+    <section class="relative min-h-screen flex items-center justify-center section-padding pt-24">
+        <!-- Floating Orbs -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-20 left-1/4 w-32 h-32 rounded-full apple-gradient-blue opacity-20 animate-float-gentle"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-24 h-24 rounded-full apple-gradient-purple opacity-25 animate-float-gentle" style="animation-delay: -2s;"></div>
+            <div class="absolute top-1/2 left-1/6 w-16 h-16 rounded-full apple-gradient-orange opacity-30 animate-float-gentle" style="animation-delay: -4s;"></div>
         </div>
-        
-        <!-- Navigation -->
-        <nav class="absolute top-0 left-0 right-0 z-50 p-6">
-            <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="text-2xl font-bold steampunk-text-brass heading-font">⚙️ AI First Foundry</div>
-                <button class="brass-gradient text-yellow-900 px-6 py-2 rounded-lg font-medium glow-brass transition-all duration-300 heading-font">
-                    Присоединиться к New Wave
-                </button>
-            </div>
-        </nav>
 
-        <!-- Hero Content -->
-        <div class="relative z-10 text-center max-w-6xl mx-auto px-6">
-            <!-- Mechanical Illustrations -->
-            <div class="flex justify-center mb-8">
-                <div class="flex items-center space-x-12">
-                    <!-- Old School Illustration -->
-                    <div class="relative">
-                        <svg width="150" height="150" viewBox="0 0 150 150" class="glow-copper">
-                            <!-- Vintage typewriter -->
-                            <rect x="20" y="80" width="110" height="50" rx="5" fill="#654321" stroke="#B87333" stroke-width="2"/>
-                            <rect x="30" y="70" width="90" height="20" rx="10" fill="#8B4513" stroke="#CD7F32" stroke-width="1"/>
-                            <!-- Keys -->
-                            <g fill="#2F4F4F" stroke="#B87333" stroke-width="0.5">
-                                <circle cx="40" cy="100" r="3"/>
-                                <circle cx="50" cy="100" r="3"/>
-                                <circle cx="60" cy="100" r="3"/>
-                                <circle cx="70" cy="100" r="3"/>
-                                <circle cx="80" cy="100" r="3"/>
-                                <circle cx="90" cy="100" r="3"/>
-                                <circle cx="45" cy="110" r="3"/>
-                                <circle cx="55" cy="110" r="3"/>
-                                <circle cx="65" cy="110" r="3"/>
-                                <circle cx="75" cy="110" r="3"/>
-                                <circle cx="85" cy="110" r="3"/>
-                            </g>
-                            <!-- Paper -->
-                            <rect x="40" y="30" width="70" height="45" fill="#F5F5DC" stroke="#B87333" stroke-width="1"/>
-                            <text x="75" y="50" font-family="monospace" font-size="8" fill="#654321" text-anchor="middle">CODE</text>
-                            <text x="75" y="60" font-family="monospace" font-size="6" fill="#8B4513" text-anchor="middle">RELIABILITY</text>
-                        </svg>
-                        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-2xl">🗿</div>
-                    </div>
-                    
-                    <!-- VS Steam -->
-                    <div class="text-6xl steampunk-text-brass steam-effect">⚙️</div>
-                    
-                    <!-- AI-First Illustration -->
-                    <div class="relative">
-                        <svg width="150" height="150" viewBox="0 0 150 150" class="glow-brass">
-                            <!-- Futuristic console -->
-                            <rect x="20" y="60" width="110" height="70" rx="8" fill="#2F4F4F" stroke="#B5A642" stroke-width="2"/>
-                            <rect x="30" y="70" width="90" height="40" rx="5" fill="#1A1A1A" stroke="#DAA520" stroke-width="1"/>
-                            <!-- Screen -->
-                            <rect x="35" y="75" width="80" height="30" fill="#000" stroke="#00FF00" stroke-width="1"/>
-                            <text x="75" y="90" font-family="monospace" font-size="8" fill="#00FF00" text-anchor="middle">AI AGENT</text>
-                            <text x="75" y="100" font-family="monospace" font-size="6" fill="#00FFFF" text-anchor="middle">GENERATING...</text>
-                            <!-- Buttons -->
-                            <g fill="#B5A642" stroke="#DAA520" stroke-width="0.5">
-                                <circle cx="40" cy="120" r="4"/>
-                                <circle cx="55" cy="120" r="4"/>
-                                <circle cx="70" cy="120" r="4"/>
-                                <circle cx="85" cy="120" r="4"/>
-                                <circle cx="100" cy="120" r="4"/>
-                            </g>
-                            <!-- Antenna -->
-                            <line x1="75" y1="60" x2="75" y2="40" stroke="#DAA520" stroke-width="2"/>
-                            <circle cx="75" cy="35" r="5" fill="#B5A642" stroke="#DAA520" stroke-width="1"/>
-                            <!-- Signal waves -->
-                            <g fill="none" stroke="#00FFFF" stroke-width="1" opacity="0.6">
-                                <circle cx="75" cy="35" r="10"/>
-                                <circle cx="75" cy="35" r="15"/>
-                                <circle cx="75" cy="35" r="20"/>
-                            </g>
-                        </svg>
-                        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-2xl">🤖</div>
-                    </div>
+        <div class="container-max text-center relative z-10">
+            <!-- Hero Icons -->
+            <div class="flex justify-center items-center space-x-12 mb-12">
+                <div class="hero-icon apple-gradient-orange text-white">
+                    🛠️
+                </div>
+                <div class="vs-container">
+                    <div class="vs-line"></div>
+                    <div class="vs-circle animate-pulse-soft">VS</div>
+                    <div class="vs-line"></div>
+                </div>
+                <div class="hero-icon apple-gradient-blue text-white">
+                    🤖
                 </div>
             </div>
-            
-            <div class="text-7xl md:text-9xl font-black mb-8 tracking-tight heading-font">
-                <span class="block steampunk-text-copper">OLD SCHOOL</span>
-                <div class="vs-divider my-8 mx-auto w-64"></div>
-                <span class="block steampunk-text-brass">AI-FIRST</span>
-            </div>
-            
-            <div class="text-xl md:text-3xl text-yellow-200 mb-12 max-w-4xl mx-auto leading-relaxed">
-                Эпический стим-панк батл между <strong class="steampunk-text-copper">механическими мастерами</strong> и 
-                <strong class="steampunk-text-brass">паровыми инноваторами</strong> будущего
-            </div>
-            
-            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-                <button class="copper-gradient text-yellow-100 px-8 py-4 rounded-xl font-semibold text-lg glow-copper transition-all duration-300 transform hover:-translate-y-1 steampunk-border heading-font">
-                    ⚒️ За механику
+
+            <!-- Hero Text -->
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-gray-900 leading-tight">
+                <span class="block text-gradient-orange">Old School</span>
+                <span class="text-2xl md:text-3xl font-normal text-gray-600 block my-4">meets</span>
+                <span class="block text-gradient-blue">AI-First</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+                The ultimate developer showdown between traditional craftsmen and AI-powered innovators
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                <button class="apple-button px-8 py-4 rounded-full text-lg min-w-[200px]">
+                    Choose AI-First
                 </button>
-                <div class="text-2xl font-black text-yellow-600">⚡</div>
-                <button class="brass-gradient text-yellow-900 px-8 py-4 rounded-xl font-semibold text-lg glow-brass transition-all duration-300 transform hover:-translate-y-1 steampunk-border heading-font">
-                    ⚙️ За паровых агентов
+                <button class="apple-button-secondary px-8 py-4 rounded-full text-lg min-w-[200px]">
+                    Learn More
                 </button>
             </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-dot"></div>
         </div>
     </section>
 
-    <!-- Battle Cards Section -->
-    <section class="py-24 px-6 relative z-10">
-        <div class="max-w-7xl mx-auto">
+    <!-- Comparison Section -->
+    <section class="section-padding bg-white/50">
+        <div class="container-max">
             <div class="text-center mb-16">
-                <h2 class="text-5xl md:text-6xl font-bold mb-6 heading-font">
-                    <span class="steampunk-text-brass">⚙️ Choose Your Guild ⚙️</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Two Approaches. <span class="text-gradient-blue">One Goal.</span>
                 </h2>
-                <p class="text-xl text-yellow-300 max-w-3xl mx-auto">
-                    В этой паровой схватке каждая гильдия обладает уникальными механическими способностями
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Both paths lead to great software, but the journey is completely different
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-start">
-                
+            <div class="grid md:grid-cols-2 gap-8">
                 <!-- Old School Card -->
-                <div class="steampunk-card rounded-3xl p-8 group glow-copper relative overflow-hidden">
-                    <!-- Mechanical decorations -->
-                    <div class="absolute top-4 right-4 gear-rotate opacity-30">
-                        <svg width="60" height="60" viewBox="0 0 60 60">
-                            <circle cx="30" cy="30" r="25" fill="none" stroke="#B87333" stroke-width="2"/>
-                            <g fill="#CD7F32">
-                                <rect x="28" y="5" width="4" height="8" />
-                                <rect x="28" y="47" width="4" height="8" />
-                                <rect x="5" y="28" width="8" height="4" />
-                                <rect x="47" y="28" width="8" height="4" />
-                            </g>
-                        </svg>
-                    </div>
-                    
+                <div class="apple-card rounded-3xl p-8 group hover:shadow-xl transition-all duration-500">
                     <div class="text-center mb-8">
-                        <div class="text-8xl mb-4">🔧</div>
-                        <h3 class="text-3xl font-bold steampunk-text-copper mb-2 heading-font">МЕХАНИЧЕСКАЯ ГИЛЬДИЯ</h3>
-                        <p class="text-yellow-400">Мастера древних искусств</p>
+                        <div class="feature-icon apple-gradient-orange text-white mx-auto">🛠️</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Old School</h3>
+                        <p class="text-gray-600">Master craftsmen of code</p>
                     </div>
-                    
+
                     <div class="space-y-6">
                         <div class="flex items-start space-x-4">
-                            <div class="copper-gradient w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border-2 border-yellow-600">
-                                <span class="text-yellow-100 text-sm font-bold">⚒️</span>
-                            </div>
+                            <div class="feature-icon bg-orange-100 text-orange-600 text-sm flex-shrink-0">⚡</div>
                             <div>
-                                <h4 class="font-semibold text-yellow-100 mb-1">Инженерная точность</h4>
-                                <p class="text-yellow-400 text-sm">Каждая шестеренка продумана до мельчайших деталей</p>
+                                <h4 class="font-semibold text-gray-900 mb-1">Deep Expertise</h4>
+                                <p class="text-gray-600 text-sm">Decades of experience building rock-solid systems</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start space-x-4">
-                            <div class="copper-gradient w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border-2 border-yellow-600">
-                                <span class="text-yellow-100 text-sm font-bold">🔩</span>
-                            </div>
+                            <div class="feature-icon bg-orange-100 text-orange-600 text-sm flex-shrink-0">🎯</div>
                             <div>
-                                <h4 class="font-semibold text-yellow-100 mb-1">Медная надежность</h4>
-                                <p class="text-yellow-400 text-sm">Механизмы работают столетиями без поломок</p>
+                                <h4 class="font-semibold text-gray-900 mb-1">Proven Methods</h4>
+                                <p class="text-gray-600 text-sm">Battle-tested approaches that stand the test of time</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start space-x-4">
-                            <div class="copper-gradient w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border-2 border-yellow-600">
-                                <span class="text-yellow-100 text-sm font-bold">📜</span>
-                            </div>
+                            <div class="feature-icon bg-orange-100 text-orange-600 text-sm flex-shrink-0">🔧</div>
                             <div>
-                                <h4 class="font-semibold text-yellow-100 mb-1">Вековые знания</h4>
-                                <p class="text-yellow-400 text-sm">Мудрость поколений инженеров в каждой строке</p>
+                                <h4 class="font-semibold text-gray-900 mb-1">Optimization</h4>
+                                <p class="text-gray-600 text-sm">Every line of code is carefully crafted and optimized</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start space-x-4">
-                            <div class="copper-gradient w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border-2 border-yellow-600">
-                                <span class="text-yellow-100 text-sm font-bold">🔨</span>
-                            </div>
+                            <div class="feature-icon bg-orange-100 text-orange-600 text-sm flex-shrink-0">🛡️</div>
                             <div>
-                                <h4 class="font-semibold text-yellow-100 mb-1">Ручная работа</h4>
-                                <p class="text-yellow-400 text-sm">Каждый компонент выкован мастерскими руками</p>
+                                <h4 class="font-semibold text-gray-900 mb-1">Reliability</h4>
+                                <p class="text-gray-600 text-sm">Systems that run for years without breaking</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="mt-8 pt-6 border-t border-yellow-600/30">
-                        <div class="font-mono text-sm text-yellow-400 bg-yellow-900/20 p-4 rounded-lg border border-yellow-600/30">
-                            <span class="text-yellow-300">// Механический подход</span><br/>
-                            <span class="text-red-300">for</span> (gear = 0; gear &lt; infinity; gear++) {<br/>
-                            &nbsp;&nbsp;precision_engineering();<br/>
-                            &nbsp;&nbsp;manual_optimization();<br/>
+
+                    <div class="mt-8 p-4 bg-gray-50 rounded-2xl">
+                        <code class="text-sm text-gray-700 font-mono">
+                            <span class="text-gray-500">// Traditional approach</span><br/>
+                            <span class="text-purple-600">for</span> (int i = 0; i < n; i++) {<br/>
+                            &nbsp;&nbsp;optimizedFunction();<br/>
                             }
-                        </div>
+                        </code>
                     </div>
                 </div>
 
                 <!-- AI-First Card -->
-                <div class="steampunk-card rounded-3xl p-8 group glow-brass relative overflow-hidden">
-                    <!-- Steam effects -->
-                    <div class="absolute top-4 left-4 steam-effect opacity-40">
-                        <svg width="40" height="60" viewBox="0 0 40 60">
-                            <g fill="#F5F5DC" opacity="0.6">
-                                <circle cx="10" cy="45" r="3"/>
-                                <circle cx="20" cy="40" r="4"/>
-                                <circle cx="30" cy="35" r="3"/>
-                                <circle cx="15" cy="25" r="5"/>
-                                <circle cx="25" cy="20" r="4"/>
-                                <circle cx="20" cy="10" r="6"/>
-                            </g>
-                        </svg>
-                    </div>
-                    
-                    <div class="absolute top-4 right-4 gear-reverse opacity-30">
-                        <svg width="60" height="60" viewBox="0 0 60 60">
-                            <circle cx="30" cy="30" r="25" fill="none" stroke="#B5A642" stroke-width="2"/>
-                            <g fill="#DAA520">
-                                <rect x="28" y="5" width="4" height="8" />
-                                <rect x="28" y="47" width="4" height="8" />
-                                <rect x="5" y="28" width="8" height="4" />
-                                <rect x="47" y="28" width="8" height="4" />
-                            </g>
-                        </svg>
-                    </div>
-                    
+                <div class="apple-card rounded-3xl p-8 group hover:shadow-xl transition-all duration-500">
                     <div class="text-center mb-8">
-                        <div class="text-8xl mb-4">⚙️</div>
-                        <h3 class="text-3xl font-bold steampunk-text-brass mb-2 heading-font">ПАРОВАЯ ЛАБОРАТОРИЯ</h3>
-                        <p class="text-yellow-400">Изобретатели будущего</p>
+                        <div class="feature-icon apple-gradient-blue text-white mx-auto">🤖</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">AI-First</h3>
+                        <p class="text-gray-600">Next-generation developers</p>
                     </div>
-                    
+
                     <div class="space-y-6">
                         <div class="flex items-start space-x-4">
-                            <div class="brass-gradient w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border-2 border-yellow-400">
-                                <span class="text-yellow-900 text-sm font-bold">💨</span>
-                            </div>
+                            <div class="feature-icon bg-blue-100 text-blue-600 text-sm flex-shrink-0">🚀</div>
                             <div>
-                                <h4 class="font-semibold text-yellow-100 mb-1">Паровая скорость</h4>
-                                <p class="text-yellow-400 text-sm">Изобретения создаются со скоростью пара</p>
+                                <h4 class="font-semibold text-gray-900 mb-1">Lightning Speed</h4>
+                                <p class="text-gray-600 text-sm">Build MVPs in hours, not months</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start space-x-4">
-                            <div class="brass-gradient w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border-2 border-yellow-400">
-                                <span class="text-yellow-900 text-sm font-bold">🤖</span>
-                            </div>
+                            <div class="feature-icon bg-blue-100 text-blue-600 text-sm flex-shrink-0">🧠</div>
                             <div>
-                                <h4 class="font-semibold text-yellow-100 mb-1">Механические помощники</h4>
-                                <p class="text-yellow-400 text-sm">Армия паровых автоматонов выполняет задачи</p>
+                                <h4 class="font-semibold text-gray-900 mb-1">AI Assistants</h4>
+                                <p class="text-gray-600 text-sm">Army of intelligent agents writing code for you</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start space-x-4">
-                            <div class="brass-gradient w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border-2 border-yellow-400">
-                                <span class="text-yellow-900 text-sm font-bold">⚡</span>
-                            </div>
+                            <div class="feature-icon bg-blue-100 text-blue-600 text-sm flex-shrink-0">💡</div>
                             <div>
-                                <h4 class="font-semibold text-yellow-100 mb-1">Электрические новации</h4>
-                                <p class="text-yellow-400 text-sm">Создают невозможные прежде устройства</p>
+                                <h4 class="font-semibold text-gray-900 mb-1">Innovation</h4>
+                                <p class="text-gray-600 text-sm">Create solutions that were impossible before</p>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-start space-x-4">
-                            <div class="brass-gradient w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border-2 border-yellow-400">
-                                <span class="text-yellow-900 text-sm font-bold">🔬</span>
-                            </div>
+                            <div class="feature-icon bg-blue-100 text-blue-600 text-sm flex-shrink-0">🌊</div>
                             <div>
-                                <h4 class="font-semibold text-yellow-100 mb-1">Мгновенная адаптация</h4>
-                                <p class="text-yellow-400 text-sm">Изучают новые методы со скоростью молнии</p>
+                                <h4 class="font-semibold text-gray-900 mb-1">Adaptation</h4>
+                                <p class="text-gray-600 text-sm">Learn new technologies instantly</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="mt-8 pt-6 border-t border-yellow-400/30">
-                        <div class="font-mono text-sm text-yellow-400 bg-yellow-900/20 p-4 rounded-lg border border-yellow-400/30">
-                            <span class="text-yellow-300">// Паровой подход</span><br/>
-                            <span class="text-green-300">steamAgent</span>.generateMechanism(<br/>
-                            &nbsp;&nbsp;"создай оптимальную машину"<br/>
+
+                    <div class="mt-8 p-4 bg-gray-50 rounded-2xl">
+                        <code class="text-sm text-gray-700 font-mono">
+                            <span class="text-gray-500">// AI-powered approach</span><br/>
+                            <span class="text-blue-600">agent</span>.generateSolution(<br/>
+                            &nbsp;&nbsp;"build optimal algorithm"<br/>
                             );
-                        </div>
+                        </code>
                     </div>
                 </div>
             </div>
@@ -504,71 +407,55 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-24 px-6 bg-gradient-to-r from-yellow-900/20 to-yellow-800/20 relative">
-        <div class="max-w-6xl mx-auto">
+    <section class="section-padding">
+        <div class="container-max">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 heading-font">
-                    <span class="steampunk-text-brass">⚙️ Показатели гильдий ⚙️</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    By the <span class="text-gradient-blue">Numbers</span>
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="text-center steampunk-card p-6 rounded-xl">
-                    <div class="text-4xl font-black steampunk-text-copper mb-2">100+</div>
-                    <div class="text-yellow-400">лет традиций<br/>Механической гильдии</div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center apple-card rounded-2xl p-6">
+                    <div class="stat-number text-gradient-orange">25+</div>
+                    <p class="text-gray-600 text-sm">Years of Experience<br/>Old School Masters</p>
                 </div>
-                
-                <div class="text-center steampunk-card p-6 rounded-xl">
-                    <div class="text-4xl font-black steampunk-text-brass mb-2">⚡10x</div>
-                    <div class="text-yellow-400">скорость пара<br/>Лаборатории</div>
+
+                <div class="text-center apple-card rounded-2xl p-6">
+                    <div class="stat-number text-gradient-blue">10x</div>
+                    <p class="text-gray-600 text-sm">Faster Development<br/>with AI Agents</p>
                 </div>
-                
-                <div class="text-center steampunk-card p-6 rounded-xl">
-                    <div class="text-4xl font-black text-yellow-100 mb-2">∞</div>
-                    <div class="text-yellow-400">возможностей<br/>с автоматонами</div>
+
+                <div class="text-center apple-card rounded-2xl p-6">
+                    <div class="stat-number text-gray-900">∞</div>
+                    <p class="text-gray-600 text-sm">Possibilities<br/>with Automation</p>
                 </div>
-                
-                <div class="text-center steampunk-card p-6 rounded-xl">
-                    <div class="text-4xl font-black text-yellow-200 mb-2">🔥</div>
-                    <div class="text-yellow-400">мощность пара<br/>будущего</div>
+
+                <div class="text-center apple-card rounded-2xl p-6">
+                    <div class="stat-number text-gradient-blue">100%</div>
+                    <p class="text-gray-600 text-sm">Future Ready<br/>Development</p>
                 </div>
             </div>
         </div>
-        
-        <!-- Decorative steam pipes -->
-        <div class="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-r from-transparent via-yellow-600/30 to-transparent"></div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="py-24 px-6 relative">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="steampunk-card rounded-3xl p-12 relative overflow-hidden">
-                <!-- Decorative gears -->
-                <div class="absolute top-6 left-6 gear-rotate opacity-20">
-                    <svg width="40" height="40" viewBox="0 0 40 40">
-                        <circle cx="20" cy="20" r="15" fill="none" stroke="#B87333" stroke-width="1"/>
-                        <g fill="#CD7F32">
-                            <rect x="18" y="5" width="4" height="6" />
-                            <rect x="18" y="29" width="4" height="6" />
-                            <rect x="5" y="18" width="6" height="4" />
-                            <rect x="29" y="18" width="6" height="4" />
-                        </g>
-                    </svg>
-                </div>
-                
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 heading-font">
-                    <span class="steampunk-text-brass">⚙️ Время вступать в гильдию! ⚙️</span>
+    <!-- Final CTA -->
+    <section class="section-padding bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="container-max text-center">
+            <div class="apple-card rounded-3xl p-12 max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Ready to choose <span class="text-gradient-blue">your path?</span>
                 </h2>
-                <p class="text-xl text-yellow-300 mb-8 max-w-2xl mx-auto">
-                    Создайте своё паровое изобретение на компонентах по выбору. 
-                    Отправляйте чертежи и получайте экспертную оценку мастеров!
+                <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Build something amazing using the components you choose. 
+                    Share your creation and get expert feedback.
                 </p>
-                <div class="flex flex-col md:flex-row gap-6 justify-center">
-                    <button class="brass-gradient text-yellow-900 px-8 py-4 rounded-xl font-semibold text-lg glow-brass transition-all duration-300 transform hover:-translate-y-1 steampunk-border heading-font">
-                        ⚙️ Присоединиться к Лаборатории
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <button class="apple-button px-8 py-4 rounded-full text-lg min-w-[240px]">
+                        Start Building with AI
                     </button>
-                    <button class="border-2 border-yellow-600 text-yellow-300 px-8 py-4 rounded-xl font-semibold text-lg hover:border-yellow-400 hover:text-yellow-200 transition-all duration-300 heading-font">
-                        📚 Изучить чертежи
+                    <button class="apple-button-secondary px-8 py-4 rounded-full text-lg min-w-[240px]">
+                        Explore Both Approaches
                     </button>
                 </div>
             </div>
@@ -576,99 +463,146 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-yellow-600/30 bg-gradient-to-b from-transparent to-yellow-900/20">
-        <div class="max-w-6xl mx-auto text-center">
-            <div class="text-2xl font-bold steampunk-text-brass mb-4 heading-font">⚙️ AI First Foundry ⚙️</div>
-            <p class="text-yellow-400 mb-6">
-                Место, где древние мастера встречаются с паровыми инновациями
+    <footer class="section-padding bg-white border-t">
+        <div class="container-max text-center">
+            <div class="text-2xl font-bold text-gray-900 mb-4">Developer Battle</div>
+            <p class="text-gray-600 mb-6">
+                Where traditional craftsmanship meets AI innovation
             </p>
-            <div class="flex justify-center space-x-8 text-yellow-400 text-sm">
-                <span>🔧 Уважение мастерам</span>
-                <span>⚙️ Сила пара</span>
-                <span>⚔️ Эпическая схватка</span>
+            <div class="flex justify-center space-x-8 text-gray-500 text-sm">
+                <span>🛠️ Respect for Masters</span>
+                <span>🤖 Power of AI</span>
+                <span>⚡ Epic Showdown</span>
             </div>
         </div>
     </footer>
 
     <script>
-        // Enhanced animations and interactions
+        // Enhanced Apple-style interactions
         document.addEventListener('DOMContentLoaded', function() {
-            // Gear rotation speed variation
-            const gears = document.querySelectorAll('.gear-rotate, .gear-reverse');
-            gears.forEach((gear, index) => {
-                gear.style.animationDuration = `${15 + index * 5}s`;
+            // Smooth reveal animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Apply fade-in animation to sections
+            document.querySelectorAll('section').forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                section.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(section);
             });
 
-            // Steam effect randomization
-            const steamElements = document.querySelectorAll('.steam-effect');
-            steamElements.forEach((element, index) => {
-                element.style.animationDelay = `-${index * 1.5}s`;
-                element.style.animationDuration = `${3 + index}s`;
-            });
+            // First section visible immediately
+            document.querySelector('section').style.opacity = '1';
+            document.querySelector('section').style.transform = 'translateY(0)';
 
             // Enhanced button interactions
             document.querySelectorAll('button').forEach(button => {
                 button.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px) scale(1.05)';
-                    this.style.filter = 'brightness(1.2)';
+                    this.style.transform = 'translateY(-2px) scale(1.02)';
                 });
-                
+
                 button.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0) scale(1)';
-                    this.style.filter = 'brightness(1)';
                 });
 
-                // Add click effect
-                button.addEventListener('click', function() {
-                    this.style.transform = 'translateY(0) scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = 'translateY(-3px) scale(1.05)';
-                    }, 150);
+                button.addEventListener('mousedown', function() {
+                    this.style.transform = 'translateY(0) scale(0.98)';
+                });
+
+                button.addEventListener('mouseup', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.02)';
                 });
             });
 
-            // Enhanced card interactions
-            document.querySelectorAll('.steampunk-card').forEach(card => {
+            // Card hover effects
+            document.querySelectorAll('.apple-card').forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
-                    this.style.filter = 'brightness(1.1)';
-                    
-                    // Add extra glow effect
-                    if (this.classList.contains('glow-copper')) {
-                        this.style.boxShadow = '0 0 40px rgba(184, 115, 51, 0.8), 0 0 80px rgba(205, 127, 50, 0.4)';
-                    } else if (this.classList.contains('glow-brass')) {
-                        this.style.boxShadow = '0 0 40px rgba(181, 166, 66, 0.8), 0 0 80px rgba(218, 165, 32, 0.4)';
-                    }
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 20px 60px rgba(31, 38, 135, 0.2)';
                 });
-                
+
                 card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                    this.style.filter = 'brightness(1)';
-                    this.style.boxShadow = '';
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 8px 32px rgba(31, 38, 135, 0.15)';
                 });
             });
 
-            // Smooth scrolling for any internal links
+            // Parallax for floating orbs
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const orbs = document.querySelectorAll('.animate-float-gentle');
+
+                orbs.forEach((orb, index) => {
+                    const speed = 0.2 + index * 0.1;
+                    orb.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+
+            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
                     }
                 });
             });
 
-            // Add parallax effect to floating gears
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const gears = document.querySelectorAll('.gear-rotate, .gear-reverse');
-                
-                gears.forEach((gear, index) => {
-                    const speed = 0.5 + index * 0.1;
-                    gear.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            // Stat counter animation
+            const animateCounters = () => {
+                const counters = document.querySelectorAll('.stat-number');
+                counters.forEach(counter => {
+                    const text = counter.textContent;
+                    if (text.includes('+') || text.includes('x') || text.includes('%')) {
+                        const finalNumber = parseInt(text.replace(/\D/g, ''));
+                        let currentNumber = 0;
+                        const increment = finalNumber / 60; // 60 frames for smooth animation
+                        
+                        const timer = setInterval(() => {
+                            currentNumber += increment;
+                            if (currentNumber >= finalNumber) {
+                                counter.textContent = text;
+                                clearInterval(timer);
+                            } else {
+                                const suffix = text.replace(/\d+/g, '');
+                                counter.textContent = Math.floor(currentNumber) + suffix;
+                            }
+                        }, 16); // ~60fps
+                    }
                 });
-            });
+            };
+
+            // Trigger counter animation when stats section is visible
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const statsSection = document.querySelector('.grid.grid-cols-2');
+            if (statsSection) {
+                statsObserver.observe(statsSection);
+            }
         });
     </script>
 </body>
