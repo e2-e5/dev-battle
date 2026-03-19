@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Батл Программистов: Old School vs AI-First | AI First</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ai-primary: #0066FF;
+            --ai-secondary: #FF4081;
+            --ai-accent: #00FFB7;
+            --ai-black: #0A0A0B;
+            --ai-white: #F8F9FA;
+        }
+        
+        .ai-gradient { background: linear-gradient(135deg, var(--ai-primary) 0%, var(--ai-secondary) 100%); }
+        .old-gradient { background: linear-gradient(135deg, #8B5A2B 0%, #D4A574 100%); }
+        .battle-bg { background: linear-gradient(135deg, #0A0A0B 0%, #1A1A1B 100%); }
+        
+        .ai-text-gradient { 
+            background: linear-gradient(135deg, var(--ai-primary) 0%, var(--ai-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .old-text-gradient { 
+            background: linear-gradient(135deg, #8B5A2B 0%, #D4A574 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .ai-glow { box-shadow: 0 0 30px rgba(0, 102, 255, 0.4); }
+        .old-glow { box-shadow: 0 0 30px rgba(139, 90, 43, 0.4); }
+        
+        .battle-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .battle-card:hover { transform: translateY(-8px) scale(1.02); }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse-ai { 0%, 100% { box-shadow: 0 0 30px rgba(0, 102, 255, 0.4); } 50% { box-shadow: 0 0 50px rgba(0, 102, 255, 0.8); } }
+        @keyframes pulse-old { 0%, 100% { box-shadow: 0 0 30px rgba(139, 90, 43, 0.4); } 50% { box-shadow: 0 0 50px rgba(139, 90, 43, 0.8); } }
+        
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-pulse-ai { animation: pulse-ai 3s ease-in-out infinite; }
+        .animate-pulse-old { animation: pulse-old 3s ease-in-out infinite; }
+        
+        .vs-divider {
+            position: relative;
+            background: linear-gradient(90deg, var(--ai-primary), var(--ai-secondary));
+            height: 4px;
+            border-radius: 2px;
+        }
+        
+        .vs-divider::before {
+            content: 'VS';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--ai-black);
+            color: var(--ai-white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    colors: {
+                        'ai-primary': '#0066FF',
+                        'ai-secondary': '#FF4081',
+                        'ai-accent': '#00FFB7',
+                        'ai-black': '#0A0A0B',
+                        'ai-white': '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen battle-bg text-ai-white font-sans antialiased overflow-x-hidden">
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/6 w-96 h-96 bg-ai-primary/20 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-1/4 right-1/6 w-64 h-64 bg-orange-600/20 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+            <div class="absolute top-1/2 left-1/2 w-48 h-48 bg-ai-secondary/15 rounded-full blur-2xl animate-float" style="animation-delay: -1.5s;"></div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="absolute top-0 left-0 right-0 z-50 p-6">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="text-2xl font-bold ai-text-gradient">AI First</div>
+                <button class="ai-gradient text-white px-6 py-2 rounded-lg font-medium hover:ai-glow transition-all duration-300">
+                    Присоединиться к New Wave
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center max-w-6xl mx-auto px-6">
+            <div class="text-7xl md:text-9xl font-black mb-8 tracking-tight">
+                <span class="block old-text-gradient">OLD SCHOOL</span>
+                <div class="vs-divider my-8 mx-auto w-64"></div>
+                <span class="block ai-text-gradient">AI-FIRST</span>
+            </div>
+            
+            <div class="text-xl md:text-3xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+                Эпический батл между <strong>старыми программистами</strong> и <strong>New Wave разработчиками</strong>, 
+                которые кодят с помощью ИИ-агентов
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                <button class="old-gradient text-white px-8 py-4 rounded-xl font-semibold text-lg hover:old-glow transition-all duration-300 transform hover:-translate-y-1">
+                    ⚔️ За Old School
+                </button>
+                <div class="text-2xl font-black text-gray-500">VS</div>
+                <button class="ai-gradient text-white px-8 py-4 rounded-xl font-semibold text-lg hover:ai-glow transition-all duration-300 transform hover:-translate-y-1">
+                    🚀 За AI-First
+                </button>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div class="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Battle Cards Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6">
+                    <span class="ai-text-gradient">Choose Your Side</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    В этой схватке каждая сторона имеет свои супер-силы. Какую сторону выберешь ты?
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                
+                <!-- Old School Card -->
+                <div class="battle-card rounded-3xl p-8 border-orange-500/20 group animate-pulse-old">
+                    <div class="text-center mb-8">
+                        <div class="text-6xl mb-4">🗿</div>
+                        <h3 class="text-3xl font-bold old-text-gradient mb-2">OLD SCHOOL</h3>
+                        <p class="text-gray-400">Классические воины кода</p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="old-gradient w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">💪</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Глубокие знания</h4>
+                                <p class="text-gray-400 text-sm">Понимают архитектуру до последнего бита</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="old-gradient w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">🛠️</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Надежность</h4>
+                                <p class="text-gray-400 text-sm">Код работает десятилетиями без багов</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="old-gradient w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">📚</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Опыт</h4>
+                                <p class="text-gray-400 text-sm">Видели всё, решали всё, знают все подводные камни</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="old-gradient w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">⚡</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Оптимизация</h4>
+                                <p class="text-gray-400 text-sm">Выжимают максимум из каждого байта памяти</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-orange-500/20">
+                        <div class="font-mono text-sm text-gray-400 bg-gray-900/50 p-4 rounded-lg">
+                            <span class="text-orange-400">// Классический подход</span><br/>
+                            <span class="text-purple-300">for</span> (int i = 0; i &lt; n; i++) {<br/>
+                            &nbsp;&nbsp;optimized_algorithm();<br/>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI-First Card -->
+                <div class="battle-card rounded-3xl p-8 border-ai-primary/20 group animate-pulse-ai">
+                    <div class="text-center mb-8">
+                        <div class="text-6xl mb-4">🤖</div>
+                        <h3 class="text-3xl font-bold ai-text-gradient mb-2">AI-FIRST</h3>
+                        <p class="text-gray-400">Новая волна разработчиков</p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="ai-gradient w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">⚡</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Скорость</h4>
+                                <p class="text-gray-400 text-sm">MVP за часы, а не месяцы</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="ai-gradient w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">🧠</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">ИИ-агенты</h4>
+                                <p class="text-gray-400 text-sm">Армия цифровых помощников пишет код</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="ai-gradient w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">🚀</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Инновации</h4>
+                                <p class="text-gray-400 text-sm">Создают то, что раньше было невозможно</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="ai-gradient w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">🌊</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white mb-1">Адаптация</h4>
+                                <p class="text-gray-400 text-sm">Мгновенно изучают новые технологии</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-ai-primary/20">
+                        <div class="font-mono text-sm text-gray-400 bg-gray-900/50 p-4 rounded-lg">
+                            <span class="text-ai-primary">// AI-подход</span><br/>
+                            <span class="text-green-400">agent</span>.generateCode(<br/>
+                            &nbsp;&nbsp;"создай оптимальный алгоритм"<br/>
+                            );
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-24 px-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    <span class="ai-text-gradient">Battle Stats</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-black old-text-gradient mb-2">25+</div>
+                    <div class="text-gray-400">лет опыта<br/>Old School</div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="text-4xl font-black ai-text-gradient mb-2">10x</div>
+                    <div class="text-gray-400">скорость<br/>AI-First</div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="text-4xl font-black text-white mb-2">∞</div>
+                    <div class="text-gray-400">возможностей<br/>с агентами</div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="text-4xl font-black text-ai-accent mb-2">100%</div>
+                    <div class="text-gray-400">будущее<br/>уже здесь</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-24 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="battle-card rounded-3xl p-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    <span class="ai-text-gradient">Время выбирать сторону!</span>
+                </h2>
+                <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Создай свой крутой проект на компонентах, которые сам выберешь. 
+                    Присылай мне ссылку и получай фидбек!
+                </p>
+                <div class="flex flex-col md:flex-row gap-6 justify-center">
+                    <button class="ai-gradient text-white px-8 py-4 rounded-xl font-semibold text-lg hover:ai-glow transition-all duration-300 transform hover:-translate-y-1">
+                        🚀 Присоединиться к AI-First
+                    </button>
+                    <button class="border-2 border-gray-600 text-gray-300 px-8 py-4 rounded-xl font-semibold text-lg hover:border-ai-primary hover:text-ai-primary transition-all duration-300">
+                        📖 Узнать больше
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="text-2xl font-bold ai-text-gradient mb-4">AI First</div>
+            <p class="text-gray-400 mb-6">
+                Место, где старые мастера встречаются с новыми технологиями
+            </p>
+            <div class="flex justify-center space-x-8 text-gray-400 text-sm">
+                <span>🗿 Respect для Old School</span>
+                <span>🤖 Power для AI-First</span>
+                <span>⚔️ Epic Battle</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Battle stats counter animation
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.text-4xl');
+            counters.forEach(counter => {
+                const target = counter.textContent;
+                if (target.includes('+') || target.includes('x') || target.includes('%')) {
+                    const number = parseInt(target.replace(/\D/g, ''));
+                    let current = 0;
+                    const increment = number / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= number) {
+                            counter.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            const suffix = target.replace(/\d+/g, '');
+                            counter.textContent = Math.floor(current) + suffix;
+                        }
+                    }, 50);
+                }
+            });
+        };
+
+        // Trigger counter animation on scroll
+        const observerOptions = { threshold: 0.5 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.textContent.includes('Battle Stats')) {
+                    animateCounters();
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('h2');
+        if (statsSection) observer.observe(statsSection);
+
+        // Add particle effects on button hover
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px) scale(1.05)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Battle card interaction
+        document.querySelectorAll('.battle-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px) scale(1.03)';
+                this.style.filter = 'brightness(1.1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.filter = 'brightness(1)';
+            });
+        });
+    </script>
+</body>
+</html>
